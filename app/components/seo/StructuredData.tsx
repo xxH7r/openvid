@@ -62,37 +62,29 @@ export function StructuredData({ data }: StructuredDataProps) {
   );
 }
 
-export function generateWebAppSchema(locale: 'es' | 'en'): WebApplicationSchema {
+export function generateWebAppSchema(locale: string): WebApplicationSchema {
   const baseUrl = 'https://openvid.dev';
-  
-  const content = {
+
+  const content: Record<string, {name: string, description: string, features: string[]}> = {
     es: {
       name: 'openvid - Editor de Video Online',
-      description: 'Editor de video online gratuito con IA. Graba pantalla, añade zooms cinemáticos, mockups profesionales y exporta en HD sin marca de agua.',
-      features: [
-        'Grabación de pantalla HD',
-        'Zooms cinemáticos con IA',
-        'Mockups profesionales',
-        'Sin marca de agua',
-        'Exportación en alta calidad',
-        'Editor online gratuito',
-      ],
+      description: 'Editor de video online gratuito con IA.',
+      features: [],
     },
     en: {
       name: 'openvid - Online Video Editor',
-      description: 'Free AI-powered online video editor. Screen recorder, cinematic zooms, professional mockups, and HD export without watermark.',
-      features: [
-        'HD screen recording',
-        'AI-powered cinematic zooms',
-        'Professional mockups',
-        'No watermark',
-        'High quality export',
-        'Free online editor',
-      ],
+      description: 'Free AI-powered online video editor.',
+      features: [],
+    },
+    zh: {
+      name: 'openvid - 在线视频编辑器',
+      description: '免费的AI驱动在线视频编辑器。屏幕录制，电影级缩放，专业模型，无水印高清导出。',
+      features: ['高清屏幕录制', 'AI电影级缩放', '专业设备模型', '无水印', '高质量导出', '免费在线编辑器'],
     },
   };
 
-  const { name, description, features } = content[locale];
+  const currentContent = content[locale] || content.zh;
+  const { name, description, features } = currentContent;
 
   return {
     '@context': 'https://schema.org',
