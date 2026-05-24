@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 
-  const { title, description, keywords } = metadata[locale as 'es' | 'en'] || metadata.es;
+  const { title, description, keywords } = metadata[locale as Extract<keyof typeof metadata, string>] || metadata.es;
 
   return {
     title,
